@@ -20,6 +20,8 @@ There are two types of users for this application
     - [ ] Customer should be able to view and submit membership form
     - [ ] Customer should be able to pay for membership
     - [ ] Customer should get a welcome email for membership confirmation
+    - [ ] Customer should be able to contact business via a contact form
+    - [ ] Customer should be able to view pages acc to browser theme
 
 ## Manager related stories
 
@@ -31,6 +33,7 @@ There are two types of users for this application
     - [ ] Manager should be able to edit events
     - [ ] Manager should be able to see event collection and customers who signed up for the event
     - [ ] Manager should be able to send email to members
+    - [ ] Manager should be able to switch to light or dark mode acc to preference
 
     - [ ] Application dashboard should have 
         - [ ] Analytics for blogs
@@ -41,4 +44,3 @@ There are two types of users for this application
 
 
     
-

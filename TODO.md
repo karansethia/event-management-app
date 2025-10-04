@@ -21,7 +21,7 @@ There are two types of users for this application
     - [ ] Customer should be able to pay for membership
     - [ ] Customer should get a welcome email for membership confirmation
     - [ ] Customer should be able to contact business via a contact form
-    - [ ] Customer should be able to view pages acc to browser theme
+    - [x] Customer should be able to view pages acc to browser theme
 
 ## Manager related stories
 

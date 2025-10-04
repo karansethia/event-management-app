@@ -19,25 +19,25 @@ const heroSections: HeroSection[] = [
     id: "section-1",
     title: "Empowering the Future of Plant-Based Food",
     subtitle: "Building sustainable communities through events, innovation, and advocacy",
-    backgroundImage: "https://vfelwsk30v.ufs.sh/f/QRThuNrgyqzt1SVy2VNKK6yzdFwE9CsQP8LWamhGv4AX3HRp", // replace with your actual image URL
+    backgroundImage: "https://vfelwsk30v.ufs.sh/f/QRThuNrgyqztIrPgk6H0ICKMeZzOGJcNDSPL3tWpR9dv6nsg", // replace with your actual image URL
   },
   {
     id: "section-2",
     title: "Join the Plant-Based Business Revolution",
     subtitle: "Exclusive memberships for startups and entrepreneurs in the plant-based industry",
-    backgroundImage: "https://vfelwsk30v.ufs.sh/f/QRThuNrgyqztfLqqi1gDdZGW42AQTP9iekqsc76tjbHwEBz0",
+    backgroundImage: "https://vfelwsk30v.ufs.sh/f/QRThuNrgyqztcmzI7iwbJBwUEpGzArxLsT4fDieKXu7HjYZP",
   },
   {
     id: "section-3",
     title: "Cultivating Connections and Business Growth",
     subtitle: "Networking opportunities and support for the plant-based food and agriculture sector",
-    backgroundImage: "https://vfelwsk30v.ufs.sh/f/QRThuNrgyqztQquX1PrgyqztT2hKj45XUNvJlskBbYxCFmOP",
+    backgroundImage: "https://vfelwsk30v.ufs.sh/f/QRThuNrgyqztniDz9RvOHX2cZMo5Cr9LtheETiagv8BpYxkd",
   },
   {
     id: "section-4",
     title: "Inspiring Public Awareness Through Community Events",
     subtitle: "Hosting impactful events to promote plant-based living and conscious choices",
-    backgroundImage: "https://vfelwsk30v.ufs.sh/f/QRThuNrgyqztNsLAVbB6IARMSmYUx0EXOL3BJo1jHC4WgzqQ",
+    backgroundImage: "https://vfelwsk30v.ufs.sh/f/QRThuNrgyqztxsZAQwq1bVRncY2m7KrMkAOTEuU3sN48pjGv",
   },
 ]
 
@@ -135,7 +135,7 @@ export default function HeroCarousel() {
         {heroSections.map((section) => (
           <div
             key={section.id}
-            className="relative flex px-5 h-full w-full shrink-0 justify-center items-end text-white"
+            className="relative  flex flex-col md:flex-row px-5 h-full w-full shrink-0 justify-end md:justify-center items-end text-white snap-center snap-mandatory"
             style={{
               backgroundImage: `url(${section.backgroundImage})`,
               backgroundSize: "cover",
@@ -144,17 +144,17 @@ export default function HeroCarousel() {
             }}
           >
             <div className="absolute inset-0 bg-black/60 z-10"></div>
-            <div className="container relative z-10 mx-auto px-4 md:px-6 py-24">
-              <h1 className="font-header mb-4 max-w-4xl text-3xl font-bold font-stretch-200% sm:text-3xl md:text-5xl">
+            <div className="container relative z-10 mx-auto px-4 md:px-6 py-10 md:py-24">
+              <h1 className="font-header mb-4 max-w-4xl text-2xl font-bold font-stretch-200% sm:text-3xl md:text-5xl">
                 {section.title}
               </h1>
               {section.subtitle && (
-                <h2 className="font-content max-w-4xl text-2xl font-medium sm:text-xl tracking-wide md:text-xl">
+                <h2 className="font-content max-w-4xl text-base font-medium sm:text-xl tracking-wide md:text-xl">
                   {section.subtitle}
                 </h2>
               )}
             </div>
-            <div className="w-1/2 h-full z-20 flex items-end justify-end pe-16 py-20">
+            <div className="w-1/2 md:h-full z-20 flex items-end justify-end pe-16 max-md:pb-20 md:py-20">
               <Button variant="outline" className="text-green-400 text-xl tracking-wide p-3 size-fit font-header px-10 rounded-full transition-all ease-in-out duration-500 backdrop-blur-md">Check Events</Button>
             </div>
           </div>

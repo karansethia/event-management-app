@@ -1,12 +1,16 @@
 import FomoSection from '@/components/fomo-section'
+import Footer from '@/components/footer'
 import Header from '@/components/header'
 import HeroCarousel from '@/components/hero-carousel'
+import ServiceCard from '@/components/service-card'
 import Testimonials from '@/components/testimonials'
 import { Button } from '@/components/ui/button'
+import { services } from '@/lib/data'
 import Image from 'next/image'
 import React from 'react'
 
 export default function Home() {
+
   return (
     <main className='w-full relative h-screen overflow-y-scroll scrollbar-hidden scroll-smooth'>
       <Header />
@@ -23,6 +27,17 @@ export default function Home() {
         <div className='w-full lg:w-2/5 h-1/3 lg:h-full'>
           <Image className='size-full hidden lg:block' width="500" height="500" alt="Sapling Image" src="/title-image.png" />
           <Image className='size-full lg:hidden block' width="500" height="500" alt="Sapling Image" src="/title-image-mobile.png" />
+        </div>
+      </section>
+      <section className='w-full relative snap-center snap-mandatory space-y-10 py-20'>
+        <div className='container mx-auto space-y-5 w-full'>
+          <h2 className='text-4xl font-header text-green-400 font-semibold text-center'>Services we offer</h2>
+          <p className='text-sm sm:text-base lg:text-xl leading-relaxed font-content dark:text-gray-300 text-gray-600 tracking-wide font-medium px-10 lg:px-20 text-center'>Comprehensive solutions designed to empower farmers, investors, and agri-businesses through innovation, guidance, and advocacy.</p>
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto px-10 xl:px-0'>
+          {services.map((item, index) => (
+            <ServiceCard service={item} key={index} />
+          ))}
         </div>
       </section>
       <section className='w-full relative snap-center snap-mandatory min-h-[20vh]'>
@@ -48,6 +63,7 @@ export default function Home() {
         <Testimonials />
       </section>
       <FomoSection />
+      <Footer />
     </main>
   )
 }

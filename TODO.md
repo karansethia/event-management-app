@@ -8,7 +8,7 @@ There are two types of users for this application
 ## Customer Related Stories 
 
 - [ ] Customer Events and Interaction Todos
-    - [ ] Customer should be able to view a vivid design for home page with all devices
+    - [x] Customer should be able to view a vivid design for home page with all devices
     - [ ] Customers should be able to view about page 
     - [ ] Customers should be able to view view stakeholders/ partners page
     - [ ] Customers should be able to view blogs
@@ -21,6 +21,7 @@ There are two types of users for this application
     - [ ] Customer should be able to pay for membership
     - [ ] Customer should get a welcome email for membership confirmation
     - [ ] Customer should be able to contact business via a contact form
+    - [ ] Customer should be able to see website in search engine results ( SEO )
     - [x] Customer should be able to view pages acc to browser theme
 
 ## Manager related stories

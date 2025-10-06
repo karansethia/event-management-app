@@ -7,7 +7,7 @@ type Props = {
 
 export default function TitleSection({ title }: Props) {
   return (
-    <section className='w-full relative h-[50vh] snap-center -mt-16 snap-mandatory flex flex-col lg:flex-row items-center'>
+    <section className='w-full relative h-[33vh] sm:h-[50vh] px-5 snap-center -mt-16 snap-mandatory flex flex-row items-center'>
       <div
         className={cn(
           "absolute inset-0",
@@ -17,9 +17,9 @@ export default function TitleSection({ title }: Props) {
         )}
       />
       <div className="flex items-end justify-center h-full w-1/2">
-        <h1 className="text-xl sm:text-3xl lg:text-7xl text-green-400 font-header font-semibold tracking-wider">{title}</h1>
+        <h1 className="text-4xl lg:text-7xl text-green-400 font-header font-semibold tracking-wider">{title}</h1>
       </div>
-      <div className="flex items-start justify-end w-1/2 h-full">
+      <div className="flex max-lg:absolute max-lg:top-1 max-lg:right-1 items-start justify-end w-3/4 lg:w-1/2 h-full">
         <Image src="/floral.webp" alt="branches" className="w-full h-auto" width="500" height="300" />
       </div>
     </section>

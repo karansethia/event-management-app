@@ -2,7 +2,7 @@ import FomoSection from '@/components/fomo-section'
 import Footer from '@/components/footer'
 import Header from '@/components/header'
 import TitleSection from '@/components/title-section'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Quote } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
@@ -57,7 +57,7 @@ export default function AboutPage() {
       <section className='w-full relative snap-center snap-mandatory space-y-10 py-20 max-w-7xl mx-auto'>
         <h2 className='text-xl lg:text-4xl tracking-wide font-header text-green-400 font-semibold w-full text-center'>From the CEO</h2>
         <div className='w-full px-5 md:px-10 lg:px-20 flex flex-col md:flex-row items-center gap-4 lg:gap-10'>
-          <Card className='relative w-2/3 py-16'>
+          <Card className='relative w-full lg:w-2/3 py-16'>
             <span className='absolute bottom-4 right-4'>
             <Image src="/leaf.webp"
               width={500} height={500} className='w-16 h-auto' alt='girl playing on a farm' />
@@ -65,11 +65,12 @@ export default function AboutPage() {
             <span className='absolute top-4 left-4'>
               <Quote className='text-green-400' size={40} />
             </span>
-            <CardContent className='font-header font-semibold text-xl leading-relaxed tracking-wider'>
-              I saw it first hand how my father and many of his farmer friends had to fight toe and nail to get their produce to the market before it went bad. That&apos;s why I want to create a coherant system that can give farmer and agro-businesses to interact and create a coherant ecosystem
+            <CardContent className='font-header font-semibold text-lg md:text-xl leading-relaxed tracking-wider'>
+              I saw it first hand how my father and many of his farmer friends had to fight toe and nail to get their produce to the market before it went bad. That&apos;s why I want to create a coherant system that can give farmer and agro-businesses to interact and create a coherant ecosystem.
+              <CardFooter className='text-green-500 dark:text-green-200'>~ Mereoleona Vermillion</CardFooter>
             </CardContent>
           </Card>
-          <div className='flex-1 relative'>
+          <div className='w-2/3 max-lg:mx-auto max-lg:mt-10 lg:flex-1 relative'>
             <div className='z-10 absolute -top-5 -left-5 bg-green-700 w-20 h-40 rounded-lg' />
             <div className='z-40 absolute -bottom-5 -right-5 bg-green-400 w-20 h-32 rounded-lg' />
               <Image src="/ceo.jpg"

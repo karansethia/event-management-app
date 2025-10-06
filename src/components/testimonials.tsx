@@ -256,7 +256,7 @@ export default function Testimonials() {
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-green-400 font-header mb-4 text-center text-3xl leading-[1.2] font-bold">
-          What Our Users Are Saying
+          What Our Members Are Saying
         </h2>
         <h3 className="text-muted-foreground mx-auto mb-8 max-w-lg text-center font-content text-lg font-medium text-balance">
           Business sector, investors and farmers are excited to be have the opportunity to work with {" "}

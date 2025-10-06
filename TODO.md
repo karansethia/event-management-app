@@ -9,8 +9,8 @@ There are two types of users for this application
 
 - [ ] Customer Events and Interaction Todos
     - [x] Customer should be able to view a vivid design for home page with all devices
-    - [ ] Customers should be able to view about page 
-    - [ ] Customers should be able to view view stakeholders/ partners page
+    - [x] Customers should be able to view about page 
+    - [x] Customers should be able to view view stakeholders/ partners page
     - [ ] Customers should be able to view blogs
     - [ ] Customers should be able to view events
     - [ ] Customers should be able to search for Events

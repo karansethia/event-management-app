@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.simpleicons.org',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'vfelwsk30v.ufs.sh',
+        pathname: '/f/**',
+      },
     ]
   }
 };

@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1759997627785,
+      "tag": "0000_outgoing_alice",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1760038211837,
+      "tag": "0001_optimal_titania",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1760209046361,
+      "tag": "0002_complex_mandroid",
+      "breakpoints": true
+    }
+  ]
+}

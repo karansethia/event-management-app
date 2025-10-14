@@ -13,7 +13,7 @@ export default function Header() {
         <Link href="/">Home</Link>
         <Link href="/members">Members</Link>
         <Link href="#">Events</Link>
-        <Link href="#">Resources</Link>
+        <Link href="/resources">Resources</Link>
         <Link href="/about">About</Link>
       </nav>
       <Sheet>

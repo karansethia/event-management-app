@@ -4,8 +4,6 @@ import Header from '@/components/header'
 import Testimonials from '@/components/testimonials'
 import TitleSection from '@/components/title-section'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Quote } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 

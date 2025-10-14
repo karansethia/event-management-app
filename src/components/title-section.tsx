@@ -16,7 +16,7 @@ export default function TitleSection({ title }: Props) {
           "dark:[background-image:radial-gradient(#248000_1px,transparent_1px)]",
         )}
       />
-      <div className="flex items-end justify-center h-full w-1/2">
+      <div className="flex items-end justify-center h-full w-3/4">
         <h1 className="text-4xl lg:text-7xl text-green-400 font-header font-semibold tracking-wider">{title}</h1>
       </div>
       <div className="flex max-lg:absolute max-lg:top-1 max-lg:right-1 items-start justify-end w-3/4 lg:w-1/2 h-full">

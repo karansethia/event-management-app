@@ -11,7 +11,8 @@ There are two types of users for this application
     - [x] Customer should be able to view a vivid design for home page with all devices
     - [x] Customers should be able to view about page 
     - [x] Customers should be able to view view stakeholders/ partners page
-    - [ ] Customers should be able to view blogs
+    - [ ] Customers should be able to view blogs list
+    - [ ] Customers should be able to view blog
     - [ ] Customers should be able to view events
     - [ ] Customers should be able to search for Events
     - [ ] Customers should be able to book event tickets

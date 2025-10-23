@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
+   @import '../styles/_variables.scss';
+   @import '../styles/_keyframe-animations.scss';
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
@@ -180,3 +184,18 @@
     animation: marquee-vertical var(--duration) linear infinite;
   }
 }
+
+.blog-content p {
+  @apply font-content tracking-wider text-sm md:text-base leading-8
+}
+
+.blog-content h1 {
+  @apply text-4xl font-header font-stretch-200% font-bold leading-12
+}
+.blog-content h2 {
+  @apply text-2xl font-header font-stretch-200% font-semibold leading-10
+}
+.blog-content h3 {
+  @apply text-xl font-header font-stretch-200% font-medium leading-9
+}
+

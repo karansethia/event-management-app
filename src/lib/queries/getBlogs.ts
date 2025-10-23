@@ -6,7 +6,15 @@ export async function getBlogs() {
 
   const results = await db
     .select({
-      blog: blogs,
+      blog: {
+        id: blogs.id,
+        blog_title: blogs.blog_title,
+        blog_slug: blogs.blog_slug,
+        blog_excerpt: blogs.blog_excerpt,
+        created_at: blogs.created_at,
+        hero_image: blogs.hero_image,
+        author: blogs.author
+      },
       category: categories
     })
     .from(blogCatagoryJunction)
@@ -85,7 +93,7 @@ export async function getBlogsByCategory(cat: string) {
 }
 
 
-export async function getBlogsBySlug(slug: string) {
+export async function getBlogBySlug(slug: string) {
 
   const results = await db
     .select({
@@ -95,7 +103,7 @@ export async function getBlogsBySlug(slug: string) {
     .from(blogCatagoryJunction)
     .innerJoin(blogs, eq(blogCatagoryJunction.blog_id, blogs.id))
     .leftJoin(categories, eq(blogCatagoryJunction.category_id, categories.id))
-    .where(eq(categories.category_slug, slug))
+    .where(eq(blogs.blog_slug, slug))
     .orderBy(asc(blogs.created_at))
 
   const assortedResults = results.reduce((acc, row) => {
@@ -116,7 +124,7 @@ export async function getBlogsBySlug(slug: string) {
 
   }, {} as Record<number, any>)
 
-  return Object.values(assortedResults)
+  return Object.values(assortedResults)[0]
 
 }
 

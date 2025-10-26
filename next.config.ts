@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: 'vfelwsk30v.ufs.sh',
         pathname: '/f/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io',
+        pathname: '/**'
+      },
     ]
   }
 };

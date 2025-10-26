@@ -31,6 +31,8 @@ There are two types of users for this application
     - [ ] Manager should be able to login to application dashboard
     - [ ] Manager should be able to add new blogs
     - [ ] Manager should be able to edit blogs
+    - [x] Manager should be able to choose image via a gallery
+    - [ ] Manager should be able to upload new images while creating or editing resource
     - [ ] Manager should be able to create new events
     - [ ] Manager should be able to edit events
     - [ ] Manager should be able to see event collection and customers who signed up for the event

@@ -28,6 +28,8 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import ImageGalleryOrUploadDialog from "./ImageGalleryOrUploadDialog"
+import Image from "next/image"
 
 
 const ResourceWithCategoryFormSchema = z.object({
@@ -80,24 +82,6 @@ export default function ResourceForm({ categories }: Props) {
     console.log(data)
   }
 
-  const watchedFile = useWatch({
-    control: form.control,
-    name: "resourceData.hero_image"
-  })
-
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || null
-    // upload image to cloud
-    if (selectedFile) {
-      form.setValue("resourceData.hero_image", "<url from cloud>", {
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-      })
-    }
-  }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(submitHandler)} className="space-y-5">
@@ -123,42 +107,38 @@ export default function ResourceForm({ categories }: Props) {
             <FormField
               control={form.control}
               name="resourceData.hero_image"
-              render={() => (
-                <FormItem>
-                  <FormControl>
-                    <div className="relative">
-                      <div
-                        className={`relative flex flex-col items-center justify-center rounded-lg border bg-transparent ${form.formState.errors.resourceData?.hero_image ? "border-red-500 bg-red-50" : "border-dashed border-gray-700 bg-gray-200"} p-6 text-center cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-800 transition-all ease-in-out duration-500`}
-                      >
-                        <Upload
-                          className={`size-7 mb-2 ${form.formState.errors.resourceData?.hero_image ? "text-red-500" : "text-gray-800 dark:text-gray-200"}`}
-                        />
-                        <div className="text-lg font-medium dark:text-white">Featured Image</div>
-                        <p className="text-xs text-gray-700 dark:text-gray-200 mt-1">PNG, JPG or WEBP up to 5MB</p>
-                        <input
-                          type="file"
-                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                          accept="image/png,image/jpeg,image/webp"
-                          onChange={handleFileChange}
-                        />
-                      </div>
-                    </div>
-                  </FormControl>
-                </FormItem>
+              render={({ field }) => (
+                <ImageGalleryOrUploadDialog
+                  key={field.value}
+                  currentSelection={field.value}
+                  onSelect={(url: string) => field.onChange(url)}
+                  trigger={
+                    <FormItem>
+                      <FormLabel className="font-content text-lg">Featured Image</FormLabel>
+                      <FormControl>
+                        {field.value.length > 0
+                          ? <span className="relative group">
+                            <Button variant="ghost" size="icon" className="absolute bottom-1 right-1 hidden group-hover:flex rounded-full size-7"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                form.resetField("resourceData.hero_image")
+                              }}>
+                              <X size={14} className="text-red-500" />
+                            </Button>
+                            <Image src={field.value} className="w-full h-auto rounded-md" alt="Featured image" width="200" height="200" />
+                          </span>
+                          : <div className="w-full h-10 rounded-md border border-gray-500 dark:border-gray-700 bg-white/5 gap-2 text-sm flex items-center justify-center">
+                            <Upload size={15} />
+                            Add Image
+                          </div>}
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  }
+                />
+
               )}
             />
-            {watchedFile && (
-              <div className="flex items-center justify-between p-3 border rounded-md bg-gray-50 dark:bg-transparent">
-                <div>
-                  <p className="text-sm font-medium">
-                    {watchedFile.length > 20 ? `${watchedFile.slice(0, 20)}...` : watchedFile}
-                  </p>
-                </div>
-                <Button variant="outline" type="button" size="sm" onClick={() => form.resetField("resourceData.hero_image")}>
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            )}
             <InputWithLabel<ResourceWithCategoryFormSchemaType>
               nameInSchema="resourceData.author"
               fieldTitle="Author"
@@ -183,7 +163,7 @@ export default function ResourceForm({ categories }: Props) {
                       <Button
                         variant="outline"
                         role="combobox"
-                        className="w-full justify-between"
+                        className={cn("w-full justify-between border-1", form.formState.errors.categoryData ? "!border-red-500" : "")}
                       >
                         Select Category
                         <ChevronsUpDown className="opacity-50" />
@@ -191,9 +171,9 @@ export default function ResourceForm({ categories }: Props) {
                     </PopoverTrigger>
                     <PopoverContent className="w-[200px] p-0">
                       <Command>
-                        <CommandInput placeholder="Search framework..." className="h-9" />
+                        <CommandInput placeholder="Search category..." className="h-9" />
                         <CommandList>
-                          <CommandEmpty>No framework found.</CommandEmpty>
+                          <CommandEmpty>No category found.</CommandEmpty>
                           <CommandGroup>
                             {categories.map((cat) => (
                               <CommandItem

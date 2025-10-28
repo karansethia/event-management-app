@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
+import { ImageKitProvider } from "@imagekit/next"
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
 
   // const session = await auth.api.getSession({
@@ -17,7 +19,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     <div className="w-full h-screen overflow-y-scroll scrollbar-hidden">
       <SidebarProvider>
         <AdminSidebar />
-        {children}
+        <ImageKitProvider urlEndpoint="https://ik.imagekit.io/sproutsocietygallery">
+          {children}
+        </ImageKitProvider>
       </SidebarProvider>
     </div>
   )

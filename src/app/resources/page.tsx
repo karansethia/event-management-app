@@ -14,8 +14,6 @@ export default async function ResourcesPage({
 
   const { category } = await searchParams;
 
-  console.log(category)
-
   const featuredBlogsData = await getBlogsByCategory("featured")
 
   const categoryBlogs = await getBlogsByCategory(category ?? "")

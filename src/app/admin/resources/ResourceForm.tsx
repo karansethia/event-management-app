@@ -1,17 +1,16 @@
 "use client"
 
-import { InsertBlogSchema } from "@/zod-schemas/blog"
-import { InsertCategorySchema, SelectCategorySchemaType } from "@/zod-schemas/category"
+import { SelectCategorySchemaType } from "@/zod-schemas/category"
 import { useFieldArray, useForm, useWatch } from "react-hook-form"
-import { z } from "zod/v4"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useAction } from "next-safe-action/hooks"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import InputWithLabel from "@/components/input/InputWithLabel"
 import RichTextEditorInput from "@/components/input/TextEditorInput"
 import { useEffect } from "react"
 import TextareaWithLabel from "@/components/input/TextareaWithLabel"
-import { Check, ChevronsUpDown, Upload, X } from "lucide-react"
+import { Check, ChevronsUpDown, Loader2, Upload, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Command,
@@ -30,14 +29,10 @@ import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import ImageGalleryOrUploadDialog from "./ImageGalleryOrUploadDialog"
 import Image from "next/image"
+import { AddCategory } from "./AddCategoryDialog"
+import { mutateResourceAction } from "@/app/actions/add-resource-action"
+import { ResourceWithCategoryFormSchema, ResourceWithCategoryFormSchemaType } from "@/zod-schemas/add-resource-schema"
 
-
-const ResourceWithCategoryFormSchema = z.object({
-  resourceData: InsertBlogSchema,
-  categoryData: z.array(InsertCategorySchema).min(1, "Choose atleast 1 category").max(4, "Blog with >4 elements in this economy?")
-})
-
-type ResourceWithCategoryFormSchemaType = z.infer<typeof ResourceWithCategoryFormSchema>;
 
 type Props = {
   categories: SelectCategorySchemaType[]
@@ -65,6 +60,13 @@ export default function ResourceForm({ categories }: Props) {
     defaultValues
   })
 
+const { execute: mutateResource, isPending } = useAction(mutateResourceAction, {
+    onSuccess: () => {
+      // toast for sucess and then route to the blog
+      // TODO: Navigate the user to the blog list page
+    }
+  })
+
   const { fields: selectedCategory, append: addCat, remove: deleteCat } = useFieldArray({
     control: form.control,
     name: "categoryData"
@@ -80,6 +82,7 @@ export default function ResourceForm({ categories }: Props) {
 
   const submitHandler = (data: ResourceWithCategoryFormSchemaType) => {
     console.log(data)
+    mutateResource(data)
   }
 
   return (
@@ -149,65 +152,70 @@ export default function ResourceForm({ categories }: Props) {
               placeholder="Excerpt" />
             <div className="w-full flex items-center gap-2 flex-wrap">
               {selectedCategory.map(cat => (
-                <Badge key={cat.id}>{cat.category_name}</Badge>
+                <Badge key={cat.id} className="cursor-pointer" onClick={() => deleteCat(cat.id)}>{cat.category_name}</Badge>
               ))}
             </div>
-            <FormField
-              control={form.control}
-              name={`categoryData`}
-              render={() => (
-                <FormItem>
-                  <FormLabel>Select Categories</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        role="combobox"
-                        className={cn("w-full justify-between border-1", form.formState.errors.categoryData ? "!border-red-500" : "")}
-                      >
-                        Select Category
-                        <ChevronsUpDown className="opacity-50" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
-                      <Command>
-                        <CommandInput placeholder="Search category..." className="h-9" />
-                        <CommandList>
-                          <CommandEmpty>No category found.</CommandEmpty>
-                          <CommandGroup>
-                            {categories.map((cat) => (
-                              <CommandItem
-                                key={cat.id}
-                                value={cat.category_name}
-                                onSelect={() => {
-                                  const existingIndex = selectedCategory.findIndex(ct => ct.category_slug === cat.category_slug)
-                                  if (existingIndex === -1) {
-                                    addCat({ id: cat.id, category_name: cat.category_name, category_slug: cat.category_slug })
-                                  }
-                                  console.log(selectedCategory)
-                                }}
-                              >
-                                {cat.category_name}
-                                <Check
-                                  className={cn(
-                                    "ml-auto",
-                                    selectedCategory.findIndex(ct => ct.id === cat.id) !== -1 ? "opacity-100" : "opacity-0"
-                                  )}
-                                />
-                              </CommandItem>
-                            ))}
-                          </CommandGroup>
-                        </CommandList>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex items-start gap-2 w-full">
+              <FormField
+                control={form.control}
+                name={`categoryData`}
+                render={() => (
+                  <FormItem className="w-full">
+                    <FormLabel>Select Categories</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          className={cn("flex-1 justify-between border-1", form.formState.errors.categoryData ? "!border-red-500" : "")}
+                        >
+                          Select Category
+                          <ChevronsUpDown className="opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-48 p-0">
+                        <Command>
+                          <CommandInput placeholder="Search category..." className="h-9" />
+                          <CommandList>
+                            <CommandEmpty>No category found.</CommandEmpty>
+                            <CommandGroup>
+                              {categories.map((cat) => (
+                                <CommandItem
+                                  key={cat.id}
+                                  value={cat.category_name}
+                                  onSelect={() => {
+                                    const existingIndex = selectedCategory.findIndex(ct => ct.category_slug === cat.category_slug)
+                                    if (existingIndex === -1) {
+                                      addCat({ id: cat.id, category_name: cat.category_name, category_slug: cat.category_slug })
+                                    }
+                                    console.log(selectedCategory)
+                                  }}
+                                >
+                                  {cat.category_name}
+                                  <Check
+                                    className={cn(
+                                      "ml-auto",
+                                      selectedCategory.findIndex(ct => ct.id === cat.id) !== -1 ? "opacity-100" : "opacity-0"
+                                    )}
+                                  />
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </CommandList>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <AddCategory onAdd={(id: number, name: string, slug: string) => {
+                addCat({ id, category_name: name, category_slug: slug })
+              }} />
+            </div>
           </div>
         </div>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{isPending ? <Loader2 className="animate-spin" /> : "Submit"}</Button>
       </form>
     </Form>
   )

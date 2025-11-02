@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 import { ImageKitProvider } from "@imagekit/next"
+import QueryProvider from "@/components/providers/query-provider";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
 
@@ -17,12 +18,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="w-full h-screen overflow-y-scroll scrollbar-hidden">
-      <SidebarProvider>
-        <AdminSidebar />
-        <ImageKitProvider urlEndpoint="https://ik.imagekit.io/sproutsocietygallery">
-          {children}
-        </ImageKitProvider>
-      </SidebarProvider>
+      <QueryProvider>
+        <SidebarProvider>
+          <AdminSidebar />
+          <ImageKitProvider urlEndpoint="https://ik.imagekit.io/sproutsocietygallery">
+            {children}
+          </ImageKitProvider>
+        </SidebarProvider>
+      </QueryProvider>
     </div>
   )
 }

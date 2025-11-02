@@ -1,13 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckCircle2, FileImage, GalleryThumbnails, Upload, X } from 'lucide-react'
-import { SetStateAction, useCallback, useState } from 'react'
-import { useForm, UseFormReturn } from 'react-hook-form';
+import { CheckCircle2, FileImage, GalleryThumbnails, Loader2, Upload, X } from 'lucide-react'
+import { SetStateAction, useState } from 'react'
+import { useForm } from 'react-hook-form';
 import z from 'zod';
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Button } from './ui/button';
 import { DialogFooter } from './ui/dialog';
 import { useHandleInputFile } from '@/hooks/use-handle-input';
-import { upload } from '@imagekit/next';
 import { useUploadImageKit } from '@/hooks/use-upload-imagekit';
 
 const MAX_FILE_SIZE = 20 * 1024 * 2014; // -> 20MB
@@ -31,6 +30,8 @@ export default function UploadImage({ onFileSelect, setShowUpload }: Props) {
 
   const [progress, setProgress] = useState(0)
 
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<ImageSchemaType>({
     resolver: zodResolver(imageSchema)
   })
@@ -50,7 +51,7 @@ export default function UploadImage({ onFileSelect, setShowUpload }: Props) {
   const { handleUpload } = useUploadImageKit((num: number) => setProgress(num), onFileSelect)
 
   const onSubmit = (data: ImageSchemaType) => {
-    console.log("Valid file:", data.file);
+    setLoading(true)
     handleUpload(data.file)
   };
 
@@ -179,8 +180,11 @@ export default function UploadImage({ onFileSelect, setShowUpload }: Props) {
             />
 
             {uploadedFile && isValid && (
-              <Button type="button" onClick={() => form.handleSubmit(onSubmit)()} className="w-full">
-                Upload File
+              <Button
+                type="button"
+                disabled={loading}
+                onClick={() => form.handleSubmit(onSubmit)()} className="w-full flex items-center gap-2">
+                {loading ? <><Loader2 className='animate-spin' /><p className='font-content tracking-wide'>{progress} %</p></> : "Upload Image"}
               </Button>
             )}
           </form>

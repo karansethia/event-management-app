@@ -1,11 +1,12 @@
-import { ImagekitResponse } from '@/app/api/imagekit/route'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import UploadImage from '@/components/upload-image'
+import { fetchImages } from '@/lib/queries/getImages'
 import { cn } from '@/lib/utils'
+import { useQuery } from '@tanstack/react-query'
 import { Upload } from 'lucide-react'
 import Image from 'next/image'
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
 
 type Props = {
   trigger: React.ReactNode,
@@ -15,25 +16,11 @@ type Props = {
 
 export default function ImageGalleryOrUploadDialog({ trigger, currentSelection, onSelect }: Props) {
 
-  const [images, setImages] = useState<ImagekitResponse[]>([])
-
   const [showUpload, setShowUpload] = useState(false)
 
   const [selection, setSelection] = useState<string | undefined>(currentSelection)
 
-  const fetchImages = useCallback(async () => {
-    try {
-      const res = await fetch("/api/imagekit");
-      const data = await res.json();
-      setImages(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchImages()
-  }, [fetchImages])
+  const { data: images, refetch } = useQuery({ queryKey: ["images"], queryFn: fetchImages })
 
   return (
     <Dialog>
@@ -49,15 +36,15 @@ export default function ImageGalleryOrUploadDialog({ trigger, currentSelection, 
           </div>
           {showUpload
             ? <UploadImage onFileSelect={(file: string) => {
-              fetchImages()
               onSelect(file)
               setSelection(file)
+              refetch()
             }} setShowUpload={setShowUpload} />
             : <>
-              <div className='h-full max-h-[calc(100%-(22*0.3rem))] pt-2 w-full columns-1 md:column-2 xl:columns-4 gap-2'>
-                {images.map(image => (
+              <div className='h-full max-h-[calc(100%-(22*0.3rem))] pt-2 w-full columns-1 md:column-2 xl:columns-4 gap-4'>
+                {images?.map(image => (
                   <Image
-                    className={cn("rounded-md cursor-pointer",
+                    className={cn("rounded-md cursor-pointer mb-4",
                       selection === image.url && "ring-2 ring-green-500 dark:ring-green-700")}
                     src={image.url}
                     key={image.name}

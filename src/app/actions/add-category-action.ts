@@ -6,6 +6,9 @@ import { InsertCategorySchema, InsertCategorySchemaType } from "@/zod-schemas/ca
 import { flattenValidationErrors } from "next-safe-action";
 import { categories } from "@/db/schema";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export const insertCategoryAction = actionClient
   .metadata({ actionName: "saveCategoryAction" })
@@ -14,7 +17,10 @@ export const insertCategoryAction = actionClient
   })
   .action(async ({ parsedInput: categoryData }: { parsedInput: InsertCategorySchemaType }) => {
 
-    // check for auth
+  const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    if(!session) redirect('/login')
 
     const results = await db.insert(categories)
       .values({

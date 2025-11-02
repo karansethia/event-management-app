@@ -6,6 +6,9 @@ import { flattenValidationErrors } from "next-safe-action";
 import { revalidatePath } from "next/cache";
 import { blogCatagoryJunction, blogs } from "@/db/schema";
 import { ResourceWithCategoryFormSchema, ResourceWithCategoryFormSchemaType } from "@/zod-schemas/add-resource-schema";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const mutateResourceAction = actionClient
   .metadata({ actionName: "saveCategoryAction" })
@@ -14,7 +17,10 @@ export const mutateResourceAction = actionClient
   })
   .action(async ({ parsedInput: blogData }: { parsedInput: ResourceWithCategoryFormSchemaType }) => {
 
-    // check for auth
+  const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    if(!session) redirect('/login')
 
     const { resourceData, categoryData } = blogData
 

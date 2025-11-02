@@ -28,11 +28,11 @@ There are two types of users for this application
 ## Manager related stories
 
 - [ ] Manager Events and Interaction Todos
-    - [ ] Manager should be able to login to application dashboard
-    - [ ] Manager should be able to add new blogs
+    - [x] Manager should be able to login to application dashboard
+    - [x] Manager should be able to add new blogs
     - [ ] Manager should be able to edit blogs
     - [x] Manager should be able to choose image via a gallery
-    - [ ] Manager should be able to upload new images while creating or editing resource
+    - [x] Manager should be able to upload new images while creating or editing resource
     - [ ] Manager should be able to create new events
     - [ ] Manager should be able to edit events
     - [ ] Manager should be able to see event collection and customers who signed up for the event
@@ -46,5 +46,8 @@ There are two types of users for this application
         - [ ] Membership form submitions
         
 
+## BUGS AND ISSUES
+
+- [ ] Images API being called multiple times ( API prolly not cached )
 
     

@@ -18,6 +18,11 @@ import {
 } from "@/components/ui/sidebar"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible"
 import Link from "next/link"
+import { Button } from "./ui/button"
+import { useAction } from "next-safe-action/hooks"
+import { logoutAction } from "@/app/actions/auth-action"
+
+
 
 // Menu items.
 const items = [
@@ -52,9 +57,11 @@ export default function AdminSidebar() {
 
   const { open, setOpen } = useSidebar()
 
+  const { execute: logout } = useAction(logoutAction)
+
   return (
     <Sidebar variant="sidebar" collapsible="icon">
-      <SidebarContent>
+      <SidebarContent className="justify-between">
         <SidebarGroup>
           <SidebarGroupLabel className="w-full flex items-center justify-between">Application
             {open &&
@@ -106,6 +113,11 @@ export default function AdminSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <Button onClick={() => {
+            logout()
+          }}>Logout</Button>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>

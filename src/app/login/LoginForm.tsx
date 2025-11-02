@@ -18,17 +18,12 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
-import { signUp } from "../actions/auth-action"
-import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-
-const loginFormSchema = z.object({
-  email: z.email("Email is missing"),
-  password: z.string().min(4, "Password is missing")
-})
-
-type LoginFormType = z.infer<typeof loginFormSchema>
+import { loginFormSchema, LoginFormType } from "@/zod-schemas/login-schema"
+import { useAction } from "next-safe-action/hooks"
+import { loginAction } from "../actions/auth-action"
+import { Loader2 } from "lucide-react"
 
 export function LoginForm({
   className,
@@ -36,7 +31,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
 
   const form = useForm<LoginFormType>({
-    mode: "onTouched",
+    mode: "onBlur",
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: "",
@@ -44,6 +39,12 @@ export function LoginForm({
     }
   })
 
+  const { execute: login, isPending } = useAction(loginAction)
+
+  const submitHandler = (data: LoginFormType) => {
+    login(data)
+  }
+  
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -73,10 +74,9 @@ export function LoginForm({
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
-                  id="email"
                   type="email"
                   placeholder="m@example.com"
-                  required
+                  {...form.register("email")}
                 />
               </Field>
               <Field>
@@ -89,10 +89,12 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input type="password" required {...form.register("password")} />
               </Field>
               <Field>
-                <Button type="button" className="dark:bg-green-400" onClick={() => signUp()}>Login</Button>
+                <Button type="button" className="dark:bg-green-400"onClick={() => {
+                  form.handleSubmit(submitHandler)()
+                }}>{ isPending ? <Loader2 className="animate-spin" /> : "Login" }</Button>
               </Field>
             </FieldGroup>
           </form>

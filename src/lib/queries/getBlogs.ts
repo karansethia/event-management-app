@@ -92,6 +92,41 @@ export async function getBlogsByCategory(cat: string) {
 
 }
 
+export async function getBlogById(id: number) {
+
+  const results = await db
+    .select({
+      blog: blogs,
+      category: categories
+    })
+    .from(blogCatagoryJunction)
+    .innerJoin(blogs, eq(blogCatagoryJunction.blog_id, blogs.id))
+    .leftJoin(categories, eq(blogCatagoryJunction.category_id, categories.id))
+    .where(eq(blogs.id, id))
+    .orderBy(asc(blogs.created_at))
+
+  const assortedResults = results.reduce((acc, row) => {
+
+    const blog = row.blog;
+
+    const category = row.category;
+
+    if (!acc[blog.id]) {
+      acc[blog.id] = { resourceData: blog, categoryData: [] };
+    }
+
+    if (category) {
+      acc[blog.id].categoryData.push(category);
+    }
+
+    return acc;
+
+  }, {} as Record<number, any>)
+
+  return Object.values(assortedResults)[0]
+
+}
+
 
 export async function getBlogBySlug(slug: string) {
 

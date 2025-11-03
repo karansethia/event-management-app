@@ -35,23 +35,24 @@ import { ResourceWithCategoryFormSchema, ResourceWithCategoryFormSchemaType } fr
 
 
 type Props = {
-  categories: SelectCategorySchemaType[]
+  categories: SelectCategorySchemaType[],
+  resource?: ResourceWithCategoryFormSchemaType
 }
 
-export default function ResourceForm({ categories }: Props) {
+export default function ResourceForm({ categories, resource }: Props) {
 
   const defaultValues: ResourceWithCategoryFormSchemaType = {
     resourceData: {
-      id: 0,
-      blog_title: "",
-      author: "",
-      blog_slug: "",
-      hero_image: "",
-      created_at: new Date(),
-      blog_content: "",
-      blog_excerpt: ""
+      id: resource ? resource.resourceData.id : 0,
+      blog_title: resource ? resource.resourceData.blog_title : "",
+      author: resource ? resource.resourceData.author : "",
+      blog_slug: resource ? resource.resourceData.blog_slug : "",
+      hero_image: resource ? resource.resourceData.hero_image : "",
+      created_at: resource ? resource.resourceData.created_at : new Date(),
+      blog_content: resource ? resource.resourceData.blog_content : "",
+      blog_excerpt: resource ? resource.resourceData.blog_excerpt : ""
     },
-    categoryData: []
+    categoryData: resource ? resource.categoryData : []
   }
 
   const form = useForm<ResourceWithCategoryFormSchemaType>({
@@ -60,7 +61,7 @@ export default function ResourceForm({ categories }: Props) {
     defaultValues
   })
 
-const { execute: mutateResource, isPending } = useAction(mutateResourceAction, {
+  const { execute: mutateResource, isPending } = useAction(mutateResourceAction, {
     onSuccess: () => {
       // toast for sucess and then route to the blog
       // TODO: Navigate the user to the blog list page
@@ -100,7 +101,7 @@ const { execute: mutateResource, isPending } = useAction(mutateResourceAction, {
             nameInSchema="resourceData.blog_content"
             fieldTitle="Blog Content"
             labelClassName="text-xl"
-            containerClass="w-2/3" />
+            containerClass="w-2/3 blog-content" />
           <div className="flex flex-col gap-3 w-1/3">
             <InputWithLabel<ResourceWithCategoryFormSchemaType>
               nameInSchema="resourceData.blog_slug"

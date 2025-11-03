@@ -30,7 +30,7 @@ There are two types of users for this application
 - [ ] Manager Events and Interaction Todos
     - [x] Manager should be able to login to application dashboard
     - [x] Manager should be able to add new blogs
-    - [ ] Manager should be able to edit blogs
+    - [x] Manager should be able to edit blogs
     - [x] Manager should be able to choose image via a gallery
     - [x] Manager should be able to upload new images while creating or editing resource
     - [ ] Manager should be able to create new events
@@ -49,5 +49,6 @@ There are two types of users for this application
 ## BUGS AND ISSUES
 
 - [ ] Images API being called multiple times ( API prolly not cached )
-
+User should be able to see categories of the current blog they are viewing
+Cant see the page for list acc to category when inside a blog page
     

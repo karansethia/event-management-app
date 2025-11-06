@@ -1,6 +1,16 @@
 import { db } from "@/db";
 import { blogCatagoryJunction, blogs, categories } from "@/db/schema";
+import { SelectBlogSchemaType } from "@/zod-schemas/blog";
 import { asc, eq } from "drizzle-orm";
+
+
+export async function getResourceList(): Promise<SelectBlogSchemaType[]> {
+  const results = await db.select()
+    .from(blogs)
+    .orderBy(blogs.created_at)
+
+  return results
+}
 
 export async function getBlogs() {
 

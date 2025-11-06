@@ -1,5 +1,5 @@
 import { getCategories } from "@/lib/queries/getBlogs";
-import ResourceForm from "../ResourceForm";
+import ResourceForm from "../_components/ResourceForm";
 
 export default async function MutateResource() {
 

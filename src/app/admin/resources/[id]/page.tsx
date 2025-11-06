@@ -1,6 +1,6 @@
 import { getBlogById, getCategories } from '@/lib/queries/getBlogs';
 import React from 'react'
-import ResourceForm from '../ResourceForm';
+import ResourceForm from '../_components/ResourceForm';
 
 export default async function EditResourcePage({ params }: { params: Promise<{ id: string }> }) {
 

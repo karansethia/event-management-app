@@ -38,6 +38,8 @@ There are two types of users for this application
     - [ ] Manager should be able to see event collection and customers who signed up for the event
     - [ ] Manager should be able to send email to members
     - [ ] Manager should be able to switch to light or dark mode acc to preference
+    - [ ] Manager should be able to logout
+    - [ ] Manager should be able to see the list of blogs in a table format
 
     - [ ] Application dashboard should have 
         - [ ] Analytics for blogs
@@ -49,6 +51,7 @@ There are two types of users for this application
 ## BUGS AND ISSUES
 
 - [ ] Images API being called multiple times ( API prolly not cached )
-User should be able to see categories of the current blog they are viewing
-Cant see the page for list acc to category when inside a blog page
+- [ ] User should be able to see categories of the current blog they are viewing
+- [ ] Cant see the page for list acc to category when inside a blog page
+- [ ] Heading sections for all subpages are misaligned
     

@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Home, Inbox, Rss, Search, Settings } from "lucide-react"
+import { Calendar, Home, Inbox, LogOut, Rss, Search, Settings } from "lucide-react"
 
 import {
   Sidebar,
@@ -53,7 +53,11 @@ const items = [
   },
 ]
 
-export default function AdminSidebar() {
+type Props = {
+  username: string
+}
+
+export default function AdminSidebar({ username }: Props) {
 
   const { open, setOpen } = useSidebar()
 
@@ -95,7 +99,7 @@ export default function AdminSidebar() {
                     </SidebarMenuSub>
                     <SidebarMenuSub>
                       <SidebarMenuSubItem className="transition-all py-1 ps-2 ease-in-out hover:bg-gray-700 w-full rounded-md">
-                        <Link href="/admin/resources/create">List</Link>
+                        <Link href="/admin/resources" className="w-full flex-1 flex">List</Link>
                       </SidebarMenuSubItem>
                     </SidebarMenuSub>
                   </CollapsibleContent>
@@ -114,10 +118,18 @@ export default function AdminSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
-          <Button onClick={() => {
+        <SidebarGroup className="flex flex-row items-center justify-between group-data-[state=expanded]:px-4 bg-muted/50">
+          <span className="flex items-center gap-2">
+            <div className="bg-green-500 rounded-full group-data-[state=expanded]:size-7 size-5 group-data-[state=expanded]:text-sm text-xs font-black font-content tracking-tighter flex items-center justify-center">{username.split(" ")[0][0]} {username.split(" ")[1][0]}</div>
+            <p className="font-header font-medium group-data-[state=expanded]:block hidden">{username}</p>
+          </span>
+          <Button 
+            className="rounded-full size-7 group-data-[state=expanded]:block hidden"
+            variant="ghost"
+            size="icon"
+            onClick={() => {
             logout()
-          }}>Logout</Button>
+          }}><LogOut /></Button>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>

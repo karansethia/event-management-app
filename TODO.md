@@ -25,6 +25,16 @@ There are two types of users for this application
     - [ ] Customer should be able to see website in search engine results ( SEO )
     - [x] Customer should be able to view pages acc to browser theme
 
+## Member related stories
+
+- [ ] Member Events and Interactions
+    - [ ] Member should be able to login
+    - [ ] Member should be able to receive notifications for all events
+    - [ ] Silver member should get access to all events ( no seating provided ) as a standalone visitor
+    - [ ] Gold member should be able to access all events with VIP seating with an option to setup stall
+    - [ ] All members should get latest updates on Sprout Society's work with government and business for agro business negotiations
+
+
 ## Manager related stories
 
 - [ ] Manager Events and Interaction Todos

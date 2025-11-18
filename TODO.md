@@ -61,7 +61,7 @@ There are two types of users for this application
 ## BUGS AND ISSUES
 
 - [ ] Images API being called multiple times ( API prolly not cached )
-- [ ] User should be able to see categories of the current blog they are viewing
-- [ ] Cant see the page for list acc to category when inside a blog page
-- [ ] Heading sections for all subpages are misaligned
+- [x] User should be able to see categories of the current blog they are viewing
+- [x] Cant see the page for list acc to category when inside a blog page
+- [x] Heading sections for all subpages are misaligned
     

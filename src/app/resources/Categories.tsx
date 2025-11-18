@@ -18,7 +18,7 @@ export default function Categories({ categories }: Props) {
     const params = new URLSearchParams(searchParams);
     params.set("category", slug)
 
-    router.push(`?${params.toString()}`)
+    router.push(`/resources?${params.toString()}`)
   }
 
   return (

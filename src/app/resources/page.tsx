@@ -31,6 +31,7 @@ export default async function ResourcesPage({
           <div className='w-full lg:w-3/4 px-4 py-2 flex flex-col gap-5'>
             {category
               ? (<>
+                <h3 className='font-header text-2xl tracking-wide capitalize font-semibold'>search : {category}</h3>
                 {categoryBlogs.map(blog => (
                   <BlogCardLarge key={blog.id} blog={blog} />
                 ))}

@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { blogCatagoryJunction, blogs, categories } from "@/db/schema";
 import { SelectBlogSchemaType } from "@/zod-schemas/blog";
+import { SelectCategorySchemaType } from "@/zod-schemas/category";
 import { asc, eq } from "drizzle-orm";
 
 
@@ -138,7 +139,7 @@ export async function getBlogById(id: number) {
 }
 
 
-export async function getBlogBySlug(slug: string) {
+export async function getBlogBySlug(slug: string): Promise<SelectBlogSchemaType & { categories: SelectCategorySchemaType[] }> {
 
   const results = await db
     .select({

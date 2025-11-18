@@ -22,6 +22,14 @@ export const blogCatagoryJunction = pgTable("blog_category_junction", {
   category_id: integer("category_id").notNull().references(() => categories.id),
 })
 
+// Member Schema
+export const memberSchema = pgTable("members", {
+  name: text("name").notNull(),
+  business_name: varchar({length: 400 }).notNull(),
+  business_address: text("business_address").notNull(),
+  business_type: text("business_type").notNull(),
+  business_description: text("business_description")
+})
 
 // Auth Schema
 export const user = pgTable("user", {

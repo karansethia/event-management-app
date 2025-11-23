@@ -1,0 +1,1 @@
+ALTER TABLE "members" ADD COLUMN "id" serial PRIMARY KEY NOT NULL;

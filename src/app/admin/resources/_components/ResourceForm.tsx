@@ -61,10 +61,11 @@ export default function ResourceForm({ categories, resource }: Props) {
     defaultValues
   })
 
-  const { execute: mutateResource, isPending } = useAction(mutateResourceAction, {
+  const { execute: mutateResource, isPending} = useAction(mutateResourceAction, {
     onSuccess: () => {
       // toast for sucess and then route to the blog
       // TODO: Navigate the user to the blog list page
+      form.reset()
     }
   })
 

@@ -1,4 +1,4 @@
-import { pgTable, serial, varchar, boolean, timestamp, text, integer } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, boolean, timestamp, text, integer, pgEnum } from "drizzle-orm/pg-core";
 
 export const blogs = pgTable("blogs", {
   id: serial("id").primaryKey(),
@@ -22,13 +22,17 @@ export const blogCatagoryJunction = pgTable("blog_category_junction", {
   category_id: integer("category_id").notNull().references(() => categories.id),
 })
 
+export const memberTypeEnum = pgEnum("member_type", ["unpaid", "silver", "gold"])
+
 // Member Schema
 export const memberSchema = pgTable("members", {
+  id: serial("id").primaryKey(),
   name: text("name").notNull(),
   business_name: varchar({length: 400 }).notNull(),
-  business_address: text("business_address").notNull(),
+  business_email: text("business_email").notNull(),
   business_type: text("business_type").notNull(),
-  business_description: text("business_description")
+  business_description: text("business_description"),
+  member_type: memberTypeEnum().notNull()
 })
 
 // Auth Schema

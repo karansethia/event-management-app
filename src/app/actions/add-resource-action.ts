@@ -4,7 +4,7 @@ import { actionClient } from "@/lib/safe-action";
 import { db } from "@/db";
 import { flattenValidationErrors } from "next-safe-action";
 import { revalidatePath } from "next/cache";
-import { blogCatagoryJunction, blogs, categories } from "@/db/schema";
+import { blogCatagoryJunction, blogs } from "@/db/schema";
 import { ResourceWithCategoryFormSchema, ResourceWithCategoryFormSchemaType } from "@/zod-schemas/add-resource-schema";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";

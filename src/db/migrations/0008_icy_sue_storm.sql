@@ -1,0 +1,1 @@
+ALTER TABLE "members" ALTER COLUMN "member_type" SET NOT NULL;

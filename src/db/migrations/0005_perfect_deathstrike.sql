@@ -1,0 +1,1 @@
+ALTER TABLE "members" RENAME COLUMN "business_address" TO "business_email";

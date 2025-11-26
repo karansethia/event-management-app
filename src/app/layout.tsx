@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import QueryProvider from "@/components/providers/query-provider";
 
 const latoSans = Lato({
   variable: "--font-lato-sans",
@@ -33,7 +34,9 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
-          {children}
+          <QueryProvider>
+            {children}
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

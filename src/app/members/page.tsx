@@ -5,6 +5,7 @@ import Testimonials from '@/components/testimonials'
 import TitleSection from '@/components/title-section'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export default function AboutPage() {
@@ -24,7 +25,9 @@ export default function AboutPage() {
               By collaborating through Sprout Society, members help farmers and agri-based businesses access advanced research, investment opportunities, and policy advocacy that drive progress. Companies like FarmForward Initiative have already partnered with local farms to streamline distribution and increase profitability through digital transformation. Every member helps close the gap between innovation and cultivation. 
             </p>
             <span className='flex justify-end py-5'>
-              <Button variant="outline" className="text-green-400 text-base sm:text-lg lg:text-xl tracking-wide p-3 size-fit font-header px-6 lg:px-10 rounded-full transition-all ease-in-out duration-500 backdrop-blur-md">Become a Member</Button>
+              <Link href="/register-member">
+                <Button variant="outline" className="text-green-400 text-base sm:text-lg lg:text-xl tracking-wide p-3 size-fit font-header px-6 lg:px-10 rounded-full transition-all ease-in-out duration-500 backdrop-blur-md">Become a Member</Button>
+              </Link>
             </span>
           </div>
         </div>

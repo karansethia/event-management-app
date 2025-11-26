@@ -1,7 +1,8 @@
 # Sprout Society User Stories
 
-There are two types of users for this application
+There are three types of users for this application
 - Customer ( Someone who could be a potential member, event attendee )   
+- Member ( Someone who has signed up and subscribed to sprout society with either gold or silver plan and can obtain benefits and updates )   
 - Manager ( Team member for sprout society that can write blogs, add events, see analytics )
 
 
@@ -18,21 +19,25 @@ There are two types of users for this application
     - [ ] Customers should be able to book event tickets
     - [ ] Customer should be able to download the booked tickets
     - [ ] Customer should recieve a copy of booked tickets via mail
-    - [ ] Customer should be able to view and submit membership form
+    - [x] Customer should be able to view and submit membership form
     - [ ] Customer should be able to pay for membership
-    - [ ] Customer should get a welcome email for membership confirmation
+    - [x] Customer should get a welcome email for membership confirmation
     - [ ] Customer should be able to contact business via a contact form
     - [ ] Customer should be able to see website in search engine results ( SEO )
     - [x] Customer should be able to view pages acc to browser theme
+    - [ ] Create a member profile when customer signs up and completes subscription
 
 ## Member related stories
 
 - [ ] Member Events and Interactions
     - [ ] Member should be able to login
+    - [ ] Member should be able to see all upcoming events in member dashboard
+    - [ ] Member should be able to stop any subscription
     - [ ] Member should be able to receive notifications for all events
     - [ ] Silver member should get access to all events ( no seating provided ) as a standalone visitor
     - [ ] Gold member should be able to access all events with VIP seating with an option to setup stall
     - [ ] All members should get latest updates on Sprout Society's work with government and business for agro business negotiations
+
 
 
 ## Manager related stories

@@ -1,4 +1,4 @@
-import { pgTable, serial, varchar, boolean, timestamp, text, integer, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, boolean, timestamp, text, integer, pgEnum, jsonb } from "drizzle-orm/pg-core";
 
 export const blogs = pgTable("blogs", {
   id: serial("id").primaryKey(),
@@ -24,6 +24,8 @@ export const blogCatagoryJunction = pgTable("blog_category_junction", {
 
 export const memberTypeEnum = pgEnum("member_type", ["unpaid", "silver", "gold"])
 
+export const subStatusEnum = pgEnum("subsciption_status", ["active", "cancelling", "pending payment", "inactive"])
+
 // Member Schema
 export const memberSchema = pgTable("members", {
   id: serial("id").primaryKey(),
@@ -32,8 +34,18 @@ export const memberSchema = pgTable("members", {
   business_email: text("business_email").notNull(),
   business_type: text("business_type").notNull(),
   business_description: text("business_description"),
-  member_type: memberTypeEnum().notNull()
+  member_type: memberTypeEnum().notNull(),
+  subsciption_status: subStatusEnum().notNull(),
+  next_invoice_date: timestamp("next_invoice_date").defaultNow(),
+  can_send_email: boolean("can_send_email").default(true)
 })
+
+export const subscriptionEvents = pgTable("subscription_events", {
+  id: serial("id").primaryKey(),
+  eventId: text("event_id"),
+  eventPayload: jsonb("event_payload").notNull(),
+  email: text("email").notNull(),
+});
 
 // Auth Schema
 export const user = pgTable("user", {

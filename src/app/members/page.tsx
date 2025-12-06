@@ -1,14 +1,16 @@
-import FomoSection from '@/components/fomo-section'
 import Footer from '@/components/footer'
 import Header from '@/components/header'
 import Testimonials from '@/components/testimonials'
 import TitleSection from '@/components/title-section'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Send } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import LoginForm from './LoginForm'
 
-export default function AboutPage() {
+export default async function AboutPage() {
   return (
     <main className='w-full relative h-screen overflow-y-scroll scrollbar-hidden scroll-smooth'>
       <Header />
@@ -22,7 +24,7 @@ export default function AboutPage() {
           </div>
           <div className='space-y-7 flex-1'>
             <p className='text-gray-200 font-content tracking-wide text-justify text-lg'>
-              By collaborating through Sprout Society, members help farmers and agri-based businesses access advanced research, investment opportunities, and policy advocacy that drive progress. Companies like FarmForward Initiative have already partnered with local farms to streamline distribution and increase profitability through digital transformation. Every member helps close the gap between innovation and cultivation. 
+              By collaborating through Sprout Society, members help farmers and agri-based businesses access advanced research, investment opportunities, and policy advocacy that drive progress. Companies like FarmForward Initiative have already partnered with local farms to streamline distribution and increase profitability through digital transformation. Every member helps close the gap between innovation and cultivation.
             </p>
             <span className='flex justify-end py-5'>
               <Link href="/register-member">
@@ -33,20 +35,28 @@ export default function AboutPage() {
         </div>
       </section>
       <section className='w-full relative snap-center snap-mandatory space-y-10 py-10 max-w-7xl mx-auto'>
-          <h2 className='text-4xl font-header text-green-400 font-semibold text-center'>Our Esteemed Members</h2>
-          <div className='hidden dark:flex items-center gap-10 w-full justify-evenly flex-wrap py-10'>
-            <Image unoptimized src='/logos/mem1.png' alt="McDonalds" className='w-20 h-auto' width="400" height="400" />
-            <Image unoptimized src='/logos/mem2.png' alt="Burger King" className='w-20 h-auto' width="400" height="400" />
-            <Image unoptimized src='/logos/mem3.png' alt="Carlsberg" className='w-20 h-auto' width="400" height="400" />
-            <Image unoptimized src='/logos/mem4.png' alt="Google" className='w-20 h-auto' width="400" height="400" />
-            <Image unoptimized src='/logos/mem5.png' alt="Startbucks" className='w-20 h-auto' width="400" height="400" />
-            <Image unoptimized src='/logos/mem6.png' alt="Startbucks" className='w-16 h-auto' width="400" height="400" />
-          </div>
+        <h2 className='text-4xl font-header text-green-400 font-semibold text-center'>Our Esteemed Members</h2>
+        <div className='hidden dark:flex items-center gap-10 w-full justify-evenly flex-wrap py-10'>
+          <Image unoptimized src='/logos/mem1.png' alt="McDonalds" className='w-20 h-auto' width="400" height="400" />
+          <Image unoptimized src='/logos/mem2.png' alt="Burger King" className='w-20 h-auto' width="400" height="400" />
+          <Image unoptimized src='/logos/mem3.png' alt="Carlsberg" className='w-20 h-auto' width="400" height="400" />
+          <Image unoptimized src='/logos/mem4.png' alt="Google" className='w-20 h-auto' width="400" height="400" />
+          <Image unoptimized src='/logos/mem5.png' alt="Startbucks" className='w-20 h-auto' width="400" height="400" />
+          <Image unoptimized src='/logos/mem6.png' alt="Startbucks" className='w-16 h-auto' width="400" height="400" />
+        </div>
       </section>
       <section className='w-full relative snap-center snap-mandatory space-y-10 py-20 max-w-7xl mx-auto'>
         <Testimonials />
       </section>
-      <FomoSection />
+      <section className='w-full px-5 md:px-10 lg:px-20 flex flex-col max-md:gap-10 md:flex-row items-center min-h-[30vh] py-10 lg:py-10'>
+        <div className='md:w-1/2 grid place-items-start'>
+          <h3 className='lg:w-4/5 font-header tracking-wider font-semibold text-4xl'>Already a member?</h3>
+          <p className='font-content tracking-wide py-1 text-lg'>Enter email to continue</p>
+        </div>
+        <div className='w-full md:w-1/2 grid place-items-center'>
+          <LoginForm />
+        </div>
+      </section>
       <Footer />
     </main>
   )

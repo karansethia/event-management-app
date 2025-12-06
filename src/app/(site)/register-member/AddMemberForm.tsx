@@ -14,9 +14,10 @@ import { Button } from "@/components/ui/button"
 import React from 'react'
 import { InsertMemberSchema, InsertMemberSchemaType } from "@/zod-schemas/members"
 import { Textarea } from "@/components/ui/textarea"
-import { insertMemberAction } from "../actions/members-action"
+import { insertMemberAction } from "@/app/actions/members-action"
 import { useAction } from "next-safe-action/hooks"
 import { Loader2 } from "lucide-react"
+import { redirect } from "next/navigation"
 
 const emptyValues = {
   name: "",
@@ -24,7 +25,10 @@ const emptyValues = {
   business_email: "",
   business_type: "",
   business_description: "",
-  member_type: "unpaid" as "unpaid" | "silver" | "gold"
+  member_type: "unpaid" as "unpaid" | "silver" | "gold",
+  next_invoice_date: new Date(),
+  subsciption_status: "pending payment" as "pending payment" | "active" | "cancelling" | "inactive" ,
+  can_send_email: true,
 }
 
 export default function AddMemberForm() {
@@ -38,11 +42,13 @@ export default function AddMemberForm() {
     onSuccess: () => {
       // toast for sucess and then route to the blog
       // TODO: Navigate the user to the blog list page
+      redirect("/pricing")
     }
   })
 
 
   const onSubmit = (data: InsertMemberSchemaType) => {
+    console.log({ ...data, next_invoice_date: new Date() })
     addMember(data)
   }
 
@@ -155,6 +161,7 @@ export default function AddMemberForm() {
           {isPending ? <Loader2 className="animate-spin" /> : "Continue"}
         </Button>
       </Field>
+      <p>{JSON.stringify(form.formState.errors)}</p>
     </>
   )
 }

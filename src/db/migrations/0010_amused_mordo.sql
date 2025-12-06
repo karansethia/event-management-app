@@ -1,0 +1,1 @@
+ALTER TABLE "members" ALTER COLUMN "next_invoice_date" DROP NOT NULL;

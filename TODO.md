@@ -30,6 +30,7 @@ There are three types of users for this application
 ## Member related stories
 
 - [ ] Member Events and Interactions
+    - [ ] Member should get success email upon successful payment
     - [ ] Member should be able to login
     - [ ] Member should be able to see all upcoming events in member dashboard
     - [ ] Member should be able to stop any subscription

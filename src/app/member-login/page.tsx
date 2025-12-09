@@ -1,5 +1,5 @@
 import { verifyAccess } from '@/lib/jwt'
-import React from 'react'
+import LoginClient from './LoginClient'
 
 export default async function MemberLoginPage({ searchParams }: { searchParams: Promise<{ token: string }> }) {
 
@@ -7,12 +7,13 @@ export default async function MemberLoginPage({ searchParams }: { searchParams: 
 
   const payload = await verifyAccess(token)
 
-  if(!payload) return <div>Invalid user</div>
+  console.log(payload)
 
-  // post api call that calls for a token and then routes to member dashboard
+  if (!payload) return <div>Invalid user</div>
+
 
   return (
-    <div>Verification Page</div>
+    <LoginClient email={payload!.email as string} />
   )
 }
 

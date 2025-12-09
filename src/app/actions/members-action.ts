@@ -69,7 +69,7 @@ export const memberLoginAction = actionClient
 
       const result = await resend.emails.send({
         from: 'onboarding@resend.dev',
-        to: "karansethia24@gmail.com",
+        to: "karansethia24@gmail.com", // TODO: replace with memberData.email after domain connection
         subject: 'Login as a member',
         react: MemberLoginEmail({ token: token }),
       });

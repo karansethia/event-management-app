@@ -1,14 +1,12 @@
-import { getBlogById, getCategories } from '@/lib/queries/getBlogs';
+import { getBlogById, getCategoriesForAdmin } from '@/lib/queries/getBlogs';
 import React from 'react'
 import ResourceForm from '../_components/ResourceForm';
 
 export default async function EditResourcePage({ params }: { params: Promise<{ id: string }> }) {
 
-  const categories = await getCategories()
+  const categories = await getCategoriesForAdmin()
 
   const { id } = await params;
-
-  console.log(id)
 
   const resource = await getBlogById(parseInt(id))
 

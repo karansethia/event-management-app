@@ -8,7 +8,7 @@ import {
   FormMessage,
   FormField
 } from '../ui/form'
-import { Checkbox } from "../ui/checkbox"
+import { Checkbox } from "@/components/ui/checkbox"
 
 type Props<S> = {
   fieldTitle: string,

@@ -3,9 +3,13 @@ import { blogCatagoryJunction, blogs, categories } from "@/db/schema";
 import { SelectBlogSchemaType } from "@/zod-schemas/blog";
 import { SelectCategorySchemaType } from "@/zod-schemas/category";
 import { asc, eq } from "drizzle-orm";
+import { verifySession } from "../dal/verifyUser";
 
 
 export async function getResourceList(): Promise<SelectBlogSchemaType[]> {
+
+  await verifySession()
+
   const results = await db.select()
     .from(blogs)
     .orderBy(blogs.created_at)
@@ -52,8 +56,23 @@ export async function getBlogs() {
   }, {} as Record<number, any>)
 
   return Object.values(assortedResults)
-
 }
+
+export async function getCategoriesForAdmin() {
+
+  await verifySession()
+
+  const results = await db
+    .select({
+      id: categories.id,
+      category_name: categories.category_name,
+      category_slug: categories.category_slug
+    })
+    .from(categories)
+
+  return results
+}
+
 
 export async function getCategories() {
 
@@ -104,6 +123,8 @@ export async function getBlogsByCategory(cat: string) {
 }
 
 export async function getBlogById(id: number) {
+
+  await verifySession()
 
   const results = await db
     .select({

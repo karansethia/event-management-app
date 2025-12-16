@@ -8,7 +8,7 @@ import { Send } from 'lucide-react';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import z from 'zod';
-import { memberLoginAction } from '../actions/members-action';
+import { memberLoginAction } from '../../actions/members-action';
 import { useAction } from 'next-safe-action/hooks';
 
 const LoginSchema = z.object({

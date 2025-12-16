@@ -23,13 +23,7 @@ const pricingPlans = [
   },
 ]
 
-export default async function MemberRegistrationPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}) {
-
-  const {email} = await searchParams;
+export default async function MemberRegistrationPage() {
 
   return (
     <main className='w-full relative h-screen overflow-y-scroll scrollbar-hidden scroll-smooth'>

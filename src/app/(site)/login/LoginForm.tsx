@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginFormSchema, LoginFormType } from "@/zod-schemas/login-schema"
 import { useAction } from "next-safe-action/hooks"
-import { loginAction } from "../actions/auth-action"
+import { loginAction } from "../../actions/auth-action"
 import { Loader2 } from "lucide-react"
 
 export function LoginForm({
